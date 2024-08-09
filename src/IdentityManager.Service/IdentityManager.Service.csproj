@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IdentityManager.Core\IdentityManager.Core.csproj" />
     <ProjectReference Include="..\IdentityManager.Data\IdentityManager.Data.csproj" />
     <ProjectReference Include="..\IdentityManager.Infrastructure\IdentityManager.Infrastructure.csproj" />
   </ItemGroup>

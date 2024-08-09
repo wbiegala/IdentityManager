@@ -1,3 +1,4 @@
+using IdentityManager.Core;
 using IdentityManager.Data;
 using IdentityManager.Infrastructure;
 
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCore();
 builder.Services.AddData(builder.Configuration.GetConnectionString("Database"));
 builder.Services.AddInfrastructure();
 
