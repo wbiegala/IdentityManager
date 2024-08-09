@@ -1,0 +1,2 @@
+# What is IdentityManager?
+IdentityManager is standalone service written in .NET to manage identity of users in microservice ecosystem. It is depend for store logins and passwords, roles and access rights and generating JWT Authentication Tokens.
