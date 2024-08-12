@@ -1,4 +1,6 @@
-﻿using IdentityManager.Domain.Base;
+﻿using IdentityManager.Domain.AccessRights;
+using IdentityManager.Domain.Base;
+using IdentityManager.Domain.Roles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,14 @@ namespace IdentityManager.Data
     public class IdentityManagerContext : DbContext, IUnitOfWork
     {
         private readonly IMediator _mediator;
+
+        public DbSet<AccessRight> AccessRights { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
+        public IdentityManagerContext(IMediator mediator) : base()
+        {
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
 
         public IdentityManagerContext(IMediator mediator, DbContextOptions options)
             : base(options)

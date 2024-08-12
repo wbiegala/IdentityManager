@@ -1,13 +1,19 @@
 using IdentityManager.Core;
 using IdentityManager.Data;
 using IdentityManager.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddCore();
-builder.Services.AddData(builder.Configuration.GetConnectionString("Database"));
+
+builder.Services.AddDbContext<IdentityManagerContext>(cfg =>
+{
+    cfg.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
+});
+
 builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers();
@@ -22,6 +28,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<IdentityManagerContext>();
+        dbContext.Database.Migrate();
+    }
 }
 
 app.UseHttpsRedirection();
