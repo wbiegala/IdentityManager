@@ -1,16 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IdentityManager.Data.Repositories;
+using IdentityManager.Data.Repositories.Impl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IdentityManager.Data
 {
     public static class DataInstaller
     {
-        public static IServiceCollection AddData(this IServiceCollection services, string dbConnectionString)
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddDbContext<IdentityManagerContext>(cfg =>
-            {
-                cfg.UseSqlServer(dbConnectionString);
-            });
+            services.AddScoped<IAccessRightRepository, AccessRightRepository>();
 
             return services;
         }

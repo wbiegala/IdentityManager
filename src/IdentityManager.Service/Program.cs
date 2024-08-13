@@ -13,6 +13,7 @@ builder.Services.AddDbContext<IdentityManagerContext>(cfg =>
 {
     cfg.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
 });
+builder.Services.AddRepositories();
 
 builder.Services.AddInfrastructure();
 
