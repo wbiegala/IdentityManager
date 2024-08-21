@@ -19,6 +19,7 @@
     <ProjectReference Include="..\IdentityManager.Core\IdentityManager.Core.csproj" />
     <ProjectReference Include="..\IdentityManager.Data\IdentityManager.Data.csproj" />
     <ProjectReference Include="..\IdentityManager.Infrastructure\IdentityManager.Infrastructure.csproj" />
+    <ProjectReference Include="..\IdentityManager.Service.Contract\IdentityManager.Service.Contract.csproj" />
   </ItemGroup>
 
 </Project>

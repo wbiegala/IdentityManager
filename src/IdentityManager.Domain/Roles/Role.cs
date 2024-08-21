@@ -5,6 +5,13 @@ namespace IdentityManager.Domain.Roles
 {
     public class Role : Aggregate
     {
+        #region consts
+
+        public const int MaxLength_Name = 128;
+
+        #endregion
+
+
         private readonly HashSet<AccessRight> _accessRights = new();
 
         /// <summary>

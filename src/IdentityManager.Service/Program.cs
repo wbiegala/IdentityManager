@@ -1,6 +1,8 @@
 using IdentityManager.Core;
 using IdentityManager.Data;
 using IdentityManager.Infrastructure;
+using IdentityManager.Service.Middlewares;
+using IdentityManager.Service.Validation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCore();
 
+builder.Services.AddValidation();
+
 builder.Services.AddDbContext<IdentityManagerContext>(cfg =>
 {
     cfg.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
@@ -16,6 +20,8 @@ builder.Services.AddDbContext<IdentityManagerContext>(cfg =>
 builder.Services.AddRepositories();
 
 builder.Services.AddInfrastructure();
+
+builder.Services.AddScoped<ValidationViolationHandlerMiddleware>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,6 +46,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ValidationViolationHandlerMiddleware>();
 
 app.MapControllers();
 

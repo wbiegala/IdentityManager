@@ -9,6 +9,7 @@ namespace IdentityManager.Data
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IAccessRightRepository, AccessRightRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             return services;
         }

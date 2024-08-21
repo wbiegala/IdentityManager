@@ -18,7 +18,7 @@ namespace IdentityManager.Data.EntityConfigurations
 
             builder.Property(role => role.Name)
                 .IsRequired()
-                .HasMaxLength(128);
+                .HasMaxLength(Role.MaxLength_Name);
 
             builder.HasIndex(role => role.Name)
                 .IsUnique();

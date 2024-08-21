@@ -1,9 +1,5 @@
 ﻿using IdentityManager.Domain.Roles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityManager.Data.Repositories.Impl
 {
@@ -16,9 +12,16 @@ namespace IdentityManager.Data.Repositories.Impl
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
+        public IUnitOfWork UnitOfWork => _dbContext;
+
         public async Task<Role?> GetAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Roles.FindAsync(id, cancellationToken);
+        }
+
+        public async Task<Role?> GetRoleByNameAsync(string searchingName, CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Roles.SingleOrDefaultAsync(r => r.Name.ToUpper() == searchingName.ToUpper(), cancellationToken);
         }
 
         public async Task SaveAsync(Role role, CancellationToken cancellationToken = default)
