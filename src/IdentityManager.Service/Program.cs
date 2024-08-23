@@ -21,7 +21,7 @@ builder.Services.AddRepositories();
 
 builder.Services.AddInfrastructure();
 
-builder.Services.AddScoped<ValidationViolationHandlerMiddleware>();
+builder.Services.AddScoped<ExceptionHandlerMiddleware>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -47,7 +47,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseMiddleware<ValidationViolationHandlerMiddleware>();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
