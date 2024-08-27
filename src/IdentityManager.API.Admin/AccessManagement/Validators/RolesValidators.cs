@@ -1,19 +1,12 @@
 ﻿using FluentValidation;
+using IdentityManager.API.Admin.Contract.AccessManagement.Roles;
 using IdentityManager.Core.Roles.Queries.GetRoleByName;
-using IdentityManager.Service.Contract.Roles;
 using MediatR;
 
-namespace IdentityManager.Service.Validation.Validators
+namespace IdentityManager.API.Admin.AccessManagement.Validators
 {
     public static class RolesValidators
     {
-        internal static IServiceCollection AddRolesValidators(this IServiceCollection services)
-        {
-            services.AddScoped<IValidator<CreateRoleRequest>, CreateRoleRequestValidator>();
-
-            return services;
-        }
-
         public class CreateRoleRequestValidator : AbstractValidator<CreateRoleRequest>
         {
             public const string Error_NonUniqueName = "Role with given name already exists.";

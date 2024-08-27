@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace IdentityManager.Service.Validation
+namespace IdentityManager.Infrastructure.Validation
 {
     internal class ValidationService : IValidationService
     {

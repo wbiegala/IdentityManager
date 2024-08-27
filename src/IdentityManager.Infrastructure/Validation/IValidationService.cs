@@ -1,4 +1,4 @@
-﻿namespace IdentityManager.Service.Validation
+﻿namespace IdentityManager.Infrastructure.Validation
 {
     public interface IValidationService
     {

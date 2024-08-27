@@ -1,4 +1,4 @@
-﻿namespace IdentityManager.Service.Contract.Roles
+﻿namespace IdentityManager.API.Admin.Contract.AccessManagement.Roles
 {
     public class CreateRoleResponse
     {

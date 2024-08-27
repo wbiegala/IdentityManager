@@ -1,6 +1,6 @@
-﻿using static IdentityManager.Service.Validation.ValidationResult;
+﻿using static IdentityManager.Infrastructure.Validation.ValidationResult;
 
-namespace IdentityManager.Service.Validation
+namespace IdentityManager.Infrastructure.Validation
 {
     public class ValidationViolationException : Exception
     {

@@ -1,5 +1,5 @@
-﻿using IdentityManager.Service.Contract.Base;
-using IdentityManager.Service.Validation;
+﻿using IdentityManager.Infrastructure.Validation;
+using IdentityManager.Service.Contract;
 using System.Text.Json;
 
 namespace IdentityManager.Service.Middlewares

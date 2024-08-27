@@ -2,8 +2,8 @@ using IdentityManager.Core;
 using IdentityManager.Data;
 using IdentityManager.Infrastructure;
 using IdentityManager.Service.Middlewares;
-using IdentityManager.Service.Validation;
 using Microsoft.EntityFrameworkCore;
+using IdentityManager.API.Admin;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCore();
 
-builder.Services.AddValidation();
+builder.Services.AddAdminApi();
 
 builder.Services.AddDbContext<IdentityManagerContext>(cfg =>
 {
@@ -23,7 +23,10 @@ builder.Services.AddInfrastructure();
 
 builder.Services.AddScoped<ExceptionHandlerMiddleware>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddAdminApiEndpoints();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

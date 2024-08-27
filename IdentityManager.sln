@@ -9,17 +9,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Service", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Service.Contract", "src\IdentityManager.Service.Contract\IdentityManager.Service.Contract.csproj", "{FE44477E-8AF1-4DD8-B750-89926F9B8361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.Domain", "src\IdentityManager.Domain\IdentityManager.Domain.csproj", "{2FED97FB-5EF4-469A-A514-62CD28077CDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Domain", "src\IdentityManager.Domain\IdentityManager.Domain.csproj", "{2FED97FB-5EF4-469A-A514-62CD28077CDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.Data", "src\IdentityManager.Data\IdentityManager.Data.csproj", "{AF330D5A-570A-40A0-B1CF-49D507FF6E8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Data", "src\IdentityManager.Data\IdentityManager.Data.csproj", "{AF330D5A-570A-40A0-B1CF-49D507FF6E8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.Core", "src\IdentityManager.Core\IdentityManager.Core.csproj", "{4EAD1227-201E-4BB2-A042-69E1A3FA0D98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Core", "src\IdentityManager.Core\IdentityManager.Core.csproj", "{4EAD1227-201E-4BB2-A042-69E1A3FA0D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.Infrastructure", "src\IdentityManager.Infrastructure\IdentityManager.Infrastructure.csproj", "{B747E1AF-AEF8-4646-A8A9-5E3463B0AED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Infrastructure", "src\IdentityManager.Infrastructure\IdentityManager.Infrastructure.csproj", "{B747E1AF-AEF8-4646-A8A9-5E3463B0AED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.Domain.Tests", "test\IdentityManager.Domain.Tests\IdentityManager.Domain.Tests.csproj", "{CDFA82A8-4B93-46BE-A2B1-1AA4DC6330D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Domain.Tests", "test\IdentityManager.Domain.Tests\IdentityManager.Domain.Tests.csproj", "{CDFA82A8-4B93-46BE-A2B1-1AA4DC6330D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.Core.Tests", "test\IdentityManager.Core.Tests\IdentityManager.Core.Tests.csproj", "{D280F2F2-6F83-42B5-A163-F657B02A4762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManager.Core.Tests", "test\IdentityManager.Core.Tests\IdentityManager.Core.Tests.csproj", "{D280F2F2-6F83-42B5-A163-F657B02A4762}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{9FD5F9EA-BF1B-4EF1-A3A3-7603865B06A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.API.Public", "src\IdentityManager.API.Public\IdentityManager.API.Public.csproj", "{02672685-CE59-4606-8002-907090BF65FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.API.Admin", "src\IdentityManager.API.Admin\IdentityManager.API.Admin.csproj", "{DCDCA04F-A7B5-41D9-B6A8-B09BF549B3A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.API.Admin.Contract", "src\IdentityManager.API.Admin.Contract\IdentityManager.API.Admin.Contract.csproj", "{1170472B-CF3C-4065-B758-7E574420DEFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityManager.API.Public.Contract", "src\IdentityManager.API.Public.Contract\IdentityManager.API.Public.Contract.csproj", "{7E77F714-1D1A-49BC-844E-FA40B8340656}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +69,22 @@ Global
 		{D280F2F2-6F83-42B5-A163-F657B02A4762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D280F2F2-6F83-42B5-A163-F657B02A4762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D280F2F2-6F83-42B5-A163-F657B02A4762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02672685-CE59-4606-8002-907090BF65FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02672685-CE59-4606-8002-907090BF65FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02672685-CE59-4606-8002-907090BF65FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02672685-CE59-4606-8002-907090BF65FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDCA04F-A7B5-41D9-B6A8-B09BF549B3A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDCA04F-A7B5-41D9-B6A8-B09BF549B3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDCA04F-A7B5-41D9-B6A8-B09BF549B3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDCA04F-A7B5-41D9-B6A8-B09BF549B3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1170472B-CF3C-4065-B758-7E574420DEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1170472B-CF3C-4065-B758-7E574420DEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1170472B-CF3C-4065-B758-7E574420DEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1170472B-CF3C-4065-B758-7E574420DEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E77F714-1D1A-49BC-844E-FA40B8340656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E77F714-1D1A-49BC-844E-FA40B8340656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E77F714-1D1A-49BC-844E-FA40B8340656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E77F714-1D1A-49BC-844E-FA40B8340656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +92,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CDFA82A8-4B93-46BE-A2B1-1AA4DC6330D8} = {22DBBE0F-2CFF-42D4-823B-372E25062D2F}
 		{D280F2F2-6F83-42B5-A163-F657B02A4762} = {22DBBE0F-2CFF-42D4-823B-372E25062D2F}
+		{02672685-CE59-4606-8002-907090BF65FB} = {9FD5F9EA-BF1B-4EF1-A3A3-7603865B06A9}
+		{DCDCA04F-A7B5-41D9-B6A8-B09BF549B3A6} = {9FD5F9EA-BF1B-4EF1-A3A3-7603865B06A9}
+		{1170472B-CF3C-4065-B758-7E574420DEFD} = {9FD5F9EA-BF1B-4EF1-A3A3-7603865B06A9}
+		{7E77F714-1D1A-49BC-844E-FA40B8340656} = {9FD5F9EA-BF1B-4EF1-A3A3-7603865B06A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8D18EA1-CEF8-4D2A-931D-B8F156CE5C21}

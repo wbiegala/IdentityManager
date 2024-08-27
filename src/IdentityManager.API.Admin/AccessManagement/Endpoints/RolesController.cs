@@ -1,12 +1,12 @@
-﻿using IdentityManager.Core.Roles.Commands;
-using IdentityManager.Service.Contract.Roles;
-using IdentityManager.Service.Validation;
+﻿using IdentityManager.API.Admin.Contract.AccessManagement.Roles;
+using IdentityManager.Core.Roles.Commands;
+using IdentityManager.Infrastructure.Validation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityManager.Service.Controllers
+namespace IdentityManager.API.Admin.AccessManagement.Endpoints
 {
-    [Route("api/[controller]")]
+    [Route(AdminApiCfg.Routing)]
     [ApiController]
     public class RolesController : ControllerBase
     {

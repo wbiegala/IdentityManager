@@ -1,4 +1,4 @@
-﻿namespace IdentityManager.Service.Contract.Base
+﻿namespace IdentityManager.Service.Contract
 {
     public class ValidationErrorResponse
     {
