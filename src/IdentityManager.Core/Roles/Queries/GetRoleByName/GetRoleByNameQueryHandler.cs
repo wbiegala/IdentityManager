@@ -14,18 +14,9 @@ namespace IdentityManager.Core.Roles.Queries.GetRoleByName
 
         public async Task<GetRoleQueryResult?> Handle(GetRoleByNameQuery request, CancellationToken cancellationToken)
         {
-            var role = await _repository.GetRoleByNameAsync(request.Name, cancellationToken);
+            var role = await _repository.GetByNameAsync(request.Name, cancellationToken);
 
-            return role is null
-                ? null
-                : new()
-                {
-                    Id = role.Id,
-                    Name = role.Name,
-                    CreatedAt = role.CreatedAt,
-                    ModifiedAt = role.ModifiedAt,
-                    IsActive = role.IsActive
-                };
+            return role is null ? null : role.Map();
         }
     }
 }

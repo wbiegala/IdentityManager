@@ -14,7 +14,7 @@ namespace IdentityManager.API.Admin
 
         public static IServiceCollection AddAdminApi(this IServiceCollection services)
         {
-            services.AddValidatorsFromAssemblyContaining<AdminApiCfg>();
+            services.AddValidatorsFromAssemblyContaining(typeof(AdminApiCfg), includeInternalTypes: true);
             return services;
         }
     }
