@@ -7,7 +7,7 @@ namespace IdentityManager.API.Admin.AccessManagement.Validators
 {
     public static class RolesValidators
     {
-        public class CreateRoleRequestValidator : AbstractValidator<CreateRoleRequest>
+        internal class CreateRoleRequestValidator : AbstractValidator<CreateRoleRequest>
         {
             public const string Error_NonUniqueName = "Role with given name already exists.";
 

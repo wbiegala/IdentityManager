@@ -25,14 +25,6 @@ namespace IdentityManager.Domain.Roles
             CreatedAt = timestamp;
             ModifiedAt = timestamp;
             IsActive = true;
-
-            var @event = new RoleCreatedEvent
-            {
-                EventId = Guid.NewGuid(),
-                CreationTimestamp = timestamp,
-                Name = name,
-            };
-            AddEvent(@event);
         }
 
         /// <summary>
@@ -59,23 +51,6 @@ namespace IdentityManager.Domain.Roles
         /// Flag determines if role is active and can be granted to any identity and used for JWT
         /// </summary>
         public bool IsActive { get; private set; }
-
-        public void Rename(string newName, DateTimeOffset timestamp)
-        {
-            var oldName = Name;
-            Name = newName;
-            ModifiedAt = timestamp;
-
-            var @event = new RoleRenamedEvent
-            {
-                EventId = Guid.NewGuid(),
-                CreationTimestamp = timestamp,
-                RoleId = Id,
-                OldName = oldName,
-                NewName = Name,
-            };
-            AddEvent(@event);
-        }
 
         public void GrantAccessRight(AccessRight accessRight, DateTimeOffset timestamp)
         {

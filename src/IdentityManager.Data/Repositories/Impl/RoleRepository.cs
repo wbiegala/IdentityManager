@@ -19,7 +19,7 @@ namespace IdentityManager.Data.Repositories.Impl
             return await _dbContext.Roles.FindAsync(id, cancellationToken);
         }
 
-        public async Task<Role?> GetRoleByNameAsync(string searchingName, CancellationToken cancellationToken = default)
+        public async Task<Role?> GetByNameAsync(string searchingName, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Roles.SingleOrDefaultAsync(r => r.Name.ToUpper() == searchingName.ToUpper(), cancellationToken);
         }
