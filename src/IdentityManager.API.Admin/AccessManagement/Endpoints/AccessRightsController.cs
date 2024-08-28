@@ -36,7 +36,7 @@ namespace IdentityManager.API.Admin.AccessManagement.Endpoints
             if (result.IsSuccess)
                 return Ok(new CreateAccessRightResponse { Id = result.Id!.Value });
 
-            return BadRequest();
+            return BadRequest(result.MapCommandError());
         }
     }
 }

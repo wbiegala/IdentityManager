@@ -1,5 +1,7 @@
 ﻿using IdentityManager.API.Admin.Contract.AccessManagement.Roles;
 using IdentityManager.Core.Roles.Commands;
+using IdentityManager.Core.Roles.Commands.GrantAccessRight;
+using IdentityManager.Core.Roles.Commands.RevokeAccessRight;
 using IdentityManager.Infrastructure.Validation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +32,37 @@ namespace IdentityManager.API.Admin.AccessManagement.Endpoints
             if (result.IsSuccess)
                 return Ok(new CreateRoleResponse { Id = result.Id!.Value });
 
-            return BadRequest();
+            return BadRequest(result.MapCommandError());
+        }
+
+        [HttpPost("{roleName}/grant/{accessRightCode}")]
+        public async Task<IActionResult> GrantAccessRightAsync(
+            [FromRoute] string roleName,
+            [FromRoute] string accessRightCode,
+            CancellationToken cancellationToken)
+        {
+            var command = new GrantAccessRightCommand { RoleName = roleName, AccessRightCode = accessRightCode };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (result.IsSuccess)
+                return Ok();
+
+            return BadRequest(result.MapCommandError());
+        }
+
+        [HttpPost("{roleName}/revoke/{accessRightCode}")]
+        public async Task<IActionResult> RevokeAccessRightAsync(
+            [FromRoute] string roleName,
+            [FromRoute] string accessRightCode,
+            CancellationToken cancellationToken)
+        {
+            var command = new RevokeAccessRightCommand { RoleName = roleName, AccessRightCode = accessRightCode };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (result.IsSuccess)
+                return Ok();
+
+            return BadRequest(result.MapCommandError());
         }
     }
 }

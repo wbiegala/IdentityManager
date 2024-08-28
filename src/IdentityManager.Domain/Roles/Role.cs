@@ -54,6 +54,9 @@ namespace IdentityManager.Domain.Roles
 
         public void GrantAccessRight(AccessRight accessRight, DateTimeOffset timestamp)
         {
+            if (_accessRights.Any(ar => ar.Id == accessRight.Id))
+                throw new AccessRightAlreadyGrantedException(this.Name, accessRight.Code);
+
             _accessRights.Add(accessRight);
 
             var @event = new AccessRightGrantedEvent
@@ -68,7 +71,10 @@ namespace IdentityManager.Domain.Roles
 
         public void RevokeAccessRight(AccessRight accessRight, DateTimeOffset timestamp)
         {
-            _accessRights.Remove(accessRight);
+            if (!_accessRights.Any(ar => ar.Id == accessRight.Id))
+                throw new AccessRightNotGrantedException(this.Name, accessRight.Code);
+
+            _accessRights.RemoveWhere(ar => ar.Id == accessRight.Id);
 
             var @event = new AccessRightRevokedEvent
             {

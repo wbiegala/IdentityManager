@@ -21,7 +21,9 @@ namespace IdentityManager.Data.Repositories.Impl
 
         public async Task<Role?> GetByNameAsync(string searchingName, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Roles.SingleOrDefaultAsync(r => r.Name.ToUpper() == searchingName.ToUpper(), cancellationToken);
+            return await _dbContext.Roles
+                .Include(role => role.AccessRights)
+                .SingleOrDefaultAsync(r => r.Name.ToUpper() == searchingName.ToUpper(), cancellationToken);
         }
 
         public async Task SaveAsync(Role role, CancellationToken cancellationToken = default)
