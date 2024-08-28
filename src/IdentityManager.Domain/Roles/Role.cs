@@ -86,6 +86,19 @@ namespace IdentityManager.Domain.Roles
             AddEvent(@event);
         }
 
+        public void Deactivate(DateTimeOffset timestamp)
+        {
+            IsActive = false;
+
+            var @event = new RoleDeactivatedEvent
+            {
+                EventId= Guid.NewGuid(),
+                CreationTimestamp= timestamp,
+                RoleId = Id,
+                RoleName = Name,
+            };
+            AddEvent(@event);
+        }
 
         public static Role Create(string name, DateTimeOffset timestamp) =>
             new Role(name, timestamp);

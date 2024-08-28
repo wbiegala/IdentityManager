@@ -12,7 +12,7 @@
         }
     }
 
-    public class  AccessRightNotGrantedException : RoleException
+    public class AccessRightNotGrantedException : RoleException
     {
         public override string Message { get; }
 

@@ -1,5 +1,6 @@
 ﻿using IdentityManager.API.Admin.Contract.AccessManagement.Roles;
 using IdentityManager.Core.Roles.Commands;
+using IdentityManager.Core.Roles.Commands.DeleteRole;
 using IdentityManager.Core.Roles.Commands.GrantAccessRight;
 using IdentityManager.Core.Roles.Commands.RevokeAccessRight;
 using IdentityManager.Infrastructure.Validation;
@@ -31,6 +32,18 @@ namespace IdentityManager.API.Admin.AccessManagement.Endpoints
 
             if (result.IsSuccess)
                 return Ok(new CreateRoleResponse { Id = result.Id!.Value });
+
+            return BadRequest(result.MapCommandError());
+        }
+
+        [HttpDelete("{roleName}")]
+        public async Task<IActionResult> DeleteRoleAsync([FromRoute]string roleName, CancellationToken cancellationToken)
+        {
+            var command = new DeleteRoleCommand { RoleName = roleName };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (result.IsSuccess)
+                return Ok();
 
             return BadRequest(result.MapCommandError());
         }

@@ -24,17 +24,17 @@ namespace IdentityManager.Core.Roles.Commands.RevokeAccessRight
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<RevokeAccessRightCommandResult> Handle(RevokeAccessRightCommand request, CancellationToken cancellationToken)
+        public async Task<RevokeAccessRightCommandResult> Handle(RevokeAccessRightCommand command, CancellationToken cancellationToken)
         {
             try
             {
                 var timestamp = _timeService.NowUtc;
 
-                var role = await _roleRepository.GetByNameAsync(request.RoleName, cancellationToken);
+                var role = await _roleRepository.GetByNameAsync(command.RoleName, cancellationToken);
                 if (role is null)
                     return new RevokeAccessRightCommandResult { IsSuccess = false, Error = "Role with given name not found." };
 
-                var accessRight = await _accessRightRepository.GetByCodeAsync(request.AccessRightCode, cancellationToken);
+                var accessRight = await _accessRightRepository.GetByCodeAsync(command.AccessRightCode, cancellationToken);
                 if (accessRight is null)
                     return new RevokeAccessRightCommandResult { IsSuccess = false, Error = "Access right with given code not found." };
 
@@ -48,7 +48,7 @@ namespace IdentityManager.Core.Roles.Commands.RevokeAccessRight
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error on revoking access right with code '{code}' to role with name '{name}'",
-                    request.AccessRightCode, request.RoleName);
+                    command.AccessRightCode, command.RoleName);
 
                 return new RevokeAccessRightCommandResult
                 {

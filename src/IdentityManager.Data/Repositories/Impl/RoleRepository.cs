@@ -14,6 +14,11 @@ namespace IdentityManager.Data.Repositories.Impl
 
         public IUnitOfWork UnitOfWork => _dbContext;
 
+        public void Delete(Role role)
+        {
+            _dbContext.Roles.Remove(role);
+        }
+
         public async Task<Role?> GetAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Roles.FindAsync(id, cancellationToken);
