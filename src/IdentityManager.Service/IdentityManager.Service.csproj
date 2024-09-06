@@ -8,13 +8,19 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IdentityManager.API.Admin\IdentityManager.API.Admin.csproj" />
     <ProjectReference Include="..\IdentityManager.Core\IdentityManager.Core.csproj" />
     <ProjectReference Include="..\IdentityManager.Data\IdentityManager.Data.csproj" />
     <ProjectReference Include="..\IdentityManager.Infrastructure\IdentityManager.Infrastructure.csproj" />
+    <ProjectReference Include="..\IdentityManager.Service.Contract\IdentityManager.Service.Contract.csproj" />
   </ItemGroup>
 
 </Project>
