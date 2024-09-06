@@ -2,6 +2,12 @@
 
 namespace IdentityManager.Domain.Roles
 {
+    public sealed record RoleActivatedEvent : DomainEvent
+    {
+        public Guid RoleId { get; init; }
+        public string RoleName { get; init; }
+    }
+
     public sealed record RoleDeactivatedEvent : DomainEvent
     {
         public Guid RoleId { get; init; }

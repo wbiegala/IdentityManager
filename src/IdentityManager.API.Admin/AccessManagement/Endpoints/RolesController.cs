@@ -1,5 +1,7 @@
 ﻿using IdentityManager.API.Admin.Contract.AccessManagement.Roles;
 using IdentityManager.Core.Roles.Commands;
+using IdentityManager.Core.Roles.Commands.ActivateRole;
+using IdentityManager.Core.Roles.Commands.DeactivateRole;
 using IdentityManager.Core.Roles.Commands.DeleteRole;
 using IdentityManager.Core.Roles.Commands.GrantAccessRight;
 using IdentityManager.Core.Roles.Commands.RevokeAccessRight;
@@ -40,6 +42,30 @@ namespace IdentityManager.API.Admin.AccessManagement.Endpoints
         public async Task<IActionResult> DeleteRoleAsync([FromRoute]string roleName, CancellationToken cancellationToken)
         {
             var command = new DeleteRoleCommand { RoleName = roleName };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (result.IsSuccess)
+                return Ok();
+
+            return BadRequest(result.MapCommandError());
+        }
+
+        [HttpPost("{roleName}/activate")]
+        public async Task<IActionResult> ActivateRoleAsync([FromRoute]string roleName, CancellationToken cancellationToken)
+        {
+            var command = new ActivateRoleCommand { RoleName = roleName };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (result.IsSuccess)
+                return Ok();
+
+            return BadRequest(result.MapCommandError());
+        }
+
+        [HttpPost("{roleName}/deactivate")]
+        public async Task<IActionResult> DeactivateRoleAsync([FromRoute] string roleName, CancellationToken cancellationToken)
+        {
+            var command = new DeactivateRoleCommand { RoleName = roleName };
             var result = await _mediator.Send(command, cancellationToken);
 
             if (result.IsSuccess)

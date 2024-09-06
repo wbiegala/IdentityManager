@@ -24,7 +24,7 @@ namespace IdentityManager.Domain.Roles
             Name = name;
             CreatedAt = timestamp;
             ModifiedAt = timestamp;
-            IsActive = true;
+            IsActive = false;
         }
 
         /// <summary>
@@ -52,12 +52,52 @@ namespace IdentityManager.Domain.Roles
         /// </summary>
         public bool IsActive { get; private set; }
 
+        public void Activate(DateTimeOffset timestamp)
+        {
+            if (IsActive)
+                throw new RoleIsActiveException(this);
+
+            IsActive = true;
+            ModifiedAt = timestamp;
+
+            var @event = new RoleActivatedEvent
+            {
+                EventId = Guid.NewGuid(),
+                CreationTimestamp = timestamp,
+                RoleId = Id,
+                RoleName = Name,
+            };
+            AddEvent(@event);
+        }
+
+        public void Deactivate(DateTimeOffset timestamp)
+        {
+            if (!IsActive)
+                throw new RoleIsInactiveException(this);
+
+            IsActive = false;
+            ModifiedAt = timestamp;
+
+            var @event = new RoleDeactivatedEvent
+            {
+                EventId = Guid.NewGuid(),
+                CreationTimestamp = timestamp,
+                RoleId = Id,
+                RoleName = Name,
+            };
+            AddEvent(@event);
+        }
+
         public void GrantAccessRight(AccessRight accessRight, DateTimeOffset timestamp)
         {
+            if (IsActive)
+                throw new RoleIsActiveException(this);
+
             if (_accessRights.Any(ar => ar.Id == accessRight.Id))
-                throw new AccessRightAlreadyGrantedException(this.Name, accessRight.Code);
+                throw new AccessRightAlreadyGrantedException(this, accessRight.Code);
 
             _accessRights.Add(accessRight);
+            ModifiedAt = timestamp;
 
             var @event = new AccessRightGrantedEvent
             {
@@ -71,10 +111,14 @@ namespace IdentityManager.Domain.Roles
 
         public void RevokeAccessRight(AccessRight accessRight, DateTimeOffset timestamp)
         {
+            if (IsActive)
+                throw new RoleIsActiveException(this);
+
             if (!_accessRights.Any(ar => ar.Id == accessRight.Id))
-                throw new AccessRightNotGrantedException(this.Name, accessRight.Code);
+                throw new AccessRightNotGrantedException(this, accessRight.Code);
 
             _accessRights.RemoveWhere(ar => ar.Id == accessRight.Id);
+            ModifiedAt = timestamp;
 
             var @event = new AccessRightRevokedEvent
             {
@@ -86,19 +130,7 @@ namespace IdentityManager.Domain.Roles
             AddEvent(@event);
         }
 
-        public void Deactivate(DateTimeOffset timestamp)
-        {
-            IsActive = false;
 
-            var @event = new RoleDeactivatedEvent
-            {
-                EventId= Guid.NewGuid(),
-                CreationTimestamp= timestamp,
-                RoleId = Id,
-                RoleName = Name,
-            };
-            AddEvent(@event);
-        }
 
         public static Role Create(string name, DateTimeOffset timestamp) =>
             new Role(name, timestamp);

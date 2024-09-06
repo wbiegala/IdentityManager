@@ -30,10 +30,12 @@ namespace IdentityManager.Core.Roles.Commands.DeleteRole
                 if (role is null)
                     return new DeleteRoleCommandResult { IsSuccess = false, Error = "Role with given name not found." };
 
+                if (role.IsActive)
+                    return new DeleteRoleCommandResult { IsSuccess = false, Error = "Role with given name is still active." };
+
                 var timestamp = _timeService.NowUtc;
 
                 await RevokeAllAccessRightsAsync(role, timestamp, cancellationToken);
-                await DeactivateRoleAsync(role, timestamp, cancellationToken);
 
                 _roleRepository.Delete(role);
                 await _roleRepository.UnitOfWork.CommitChangesAsync();
@@ -42,7 +44,7 @@ namespace IdentityManager.Core.Roles.Commands.DeleteRole
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error on deleting new role.");
+                _logger.LogError(ex, "Error on deleting role.");
 
                 return new DeleteRoleCommandResult
                 {

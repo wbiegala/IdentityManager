@@ -14,7 +14,7 @@ namespace IdentityManager.Core.AccessRights.Queries.GetAccessRightByCode
 
         public async Task<GetAccessRightQueryResult?> Handle(GetAccessRightByCodeQuery query, CancellationToken cancellationToken)
         {
-            var accessRight = await _repository.GetByCodeAsync(query.Code, cancellationToken);
+            var accessRight = await _repository.GetByCodeAsync(query.Code, cancellationToken: cancellationToken);
 
             return accessRight is null ? null : accessRight.Map();
         }

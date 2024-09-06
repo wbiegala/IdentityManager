@@ -34,7 +34,7 @@ namespace IdentityManager.Core.Roles.Commands.RevokeAccessRight
                 if (role is null)
                     return new RevokeAccessRightCommandResult { IsSuccess = false, Error = "Role with given name not found." };
 
-                var accessRight = await _accessRightRepository.GetByCodeAsync(command.AccessRightCode, cancellationToken);
+                var accessRight = await _accessRightRepository.GetByCodeAsync(command.AccessRightCode, cancellationToken: cancellationToken);
                 if (accessRight is null)
                     return new RevokeAccessRightCommandResult { IsSuccess = false, Error = "Access right with given code not found." };
 

@@ -33,7 +33,7 @@ namespace IdentityManager.Core.Roles.Commands.GrantAccessRight
                 if (role is null)
                     return new GrantAccessRightCommandResult { IsSuccess = false, Error = "Role with given name not found." };
 
-                var accessRight = await _accessRightRepository.GetByCodeAsync(command.AccessRightCode, cancellationToken);
+                var accessRight = await _accessRightRepository.GetByCodeAsync(command.AccessRightCode, cancellationToken: cancellationToken);
                 if (accessRight is null)
                     return new GrantAccessRightCommandResult { IsSuccess = false, Error = "Access right with given code not found." };
 

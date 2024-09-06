@@ -1,4 +1,5 @@
 ﻿using IdentityManager.Domain.AccessRights;
+using IdentityManager.Domain.Roles;
 
 namespace IdentityManager.Data.Repositories
 {
@@ -6,7 +7,8 @@ namespace IdentityManager.Data.Repositories
     {
         Task SaveAsync(AccessRight accessRight, CancellationToken cancellationToken = default);
         Task<AccessRight?> GetAsync(Guid id, CancellationToken cancellationToken = default);
-        Task<AccessRight?> GetByCodeAsync(string code, CancellationToken cancellationToken = default);
+        Task<AccessRight?> GetByCodeAsync(string code, bool includeRoles = false, CancellationToken cancellationToken = default);
         Task<AccessRight?> GetByNameAsync(string name, CancellationToken cancellationToken = default);
+        void Delete(AccessRight accessRight);
     }
 }

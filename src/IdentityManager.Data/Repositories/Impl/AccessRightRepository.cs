@@ -15,14 +15,22 @@ namespace IdentityManager.Data.Repositories.Impl
 
         public IUnitOfWork UnitOfWork => _dbContext;
 
+        public void Delete(AccessRight accessRight)
+        {
+            _dbContext.AccessRights.Remove(accessRight);
+        }
+
         public async Task<AccessRight?> GetAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _dbContext.AccessRights.FindAsync(id, cancellationToken);
         }
 
-        public async Task<AccessRight?> GetByCodeAsync(string code, CancellationToken cancellationToken = default)
+        public async Task<AccessRight?> GetByCodeAsync(string code, bool includeRoles = false, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.AccessRights.SingleOrDefaultAsync(ac => ac.Code.ToUpper() == code.ToUpper(), cancellationToken);
+            var query = _dbContext.AccessRights.AsQueryable();
+            query = includeRoles ? query.Include(ar => ar.Roles) : query;
+
+            return await query.SingleOrDefaultAsync(ac => ac.Code.ToUpper() == code.ToUpper(), cancellationToken);
         }
 
         public async Task<AccessRight?> GetByNameAsync(string name, CancellationToken cancellationToken = default)

@@ -1,5 +1,6 @@
 ﻿using IdentityManager.API.Admin.Contract.AccessManagement.AccessRights;
 using IdentityManager.Core.AccessRights.Commands.CreateAccessRight;
+using IdentityManager.Core.AccessRights.Commands.DeleteAccessRight;
 using IdentityManager.Infrastructure.Validation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,18 @@ namespace IdentityManager.API.Admin.AccessManagement.Endpoints
 
             if (result.IsSuccess)
                 return Ok(new CreateAccessRightResponse { Id = result.Id!.Value });
+
+            return BadRequest(result.MapCommandError());
+        }
+
+        [HttpDelete("{accessRightCode}")]
+        public async Task<IActionResult> DeleteAccessRightAsync([FromRoute]string accessRightCode, CancellationToken cancellationToken)
+        {
+            var command = new DeleteAccessRightCommand { Code = accessRightCode };
+            var result = await _mediator.Send(command, cancellationToken);
+
+            if (result.IsSuccess)
+                return Ok();
 
             return BadRequest(result.MapCommandError());
         }

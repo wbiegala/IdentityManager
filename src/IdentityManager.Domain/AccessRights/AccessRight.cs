@@ -17,6 +17,7 @@ namespace IdentityManager.Domain.AccessRights
             Code = code;
             Name = name;
             Description = description;
+            CreatedAt = timestamp;
 
             var @event = new AccessRightCreatedEvent
             {
@@ -53,6 +54,8 @@ namespace IdentityManager.Domain.AccessRights
         /// </summary>
         public DateTimeOffset CreatedAt { get; private set; }
 
+        public bool IsGrantedToAnyRole() 
+            => _assignedRoles.Any();
 
         public static AccessRight Create(string code, string name, string? description, DateTimeOffset timestamp) =>
             new AccessRight(code, name, description, timestamp);

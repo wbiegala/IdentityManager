@@ -38,7 +38,7 @@ namespace IdentityManager.Core.Roles.Commands
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error on creating new role.");
+                _logger.LogError(ex, "Error on activating role.");
 
                 return new CreateRoleCommandResult
                 {
