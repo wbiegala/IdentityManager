@@ -1,5 +1,6 @@
 ﻿using IdentityManager.Domain.AccessRights;
 using IdentityManager.Domain.Base;
+using IdentityManager.Domain.Identities;
 using IdentityManager.Domain.Roles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,10 @@ namespace IdentityManager.Data
 
         public DbSet<AccessRight> AccessRights { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Identity> Identities { get; set; }
+
+        internal DbSet<Credential> Credentials { get; set; }
+        internal DbSet<IdentityRole> IdentityRoles { get; set; }
 
         public IdentityManagerContext(IMediator mediator) : base()
         {
@@ -43,6 +48,11 @@ namespace IdentityManager.Data
             }
 
             await base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
