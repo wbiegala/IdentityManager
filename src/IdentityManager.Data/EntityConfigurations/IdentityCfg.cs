@@ -13,6 +13,8 @@ namespace IdentityManager.Data.EntityConfigurations
         {
             builder.HasKey(identity => identity.Id);
 
+            builder.Ignore(identity => identity.DomainEvents);
+
             builder.Property(identity => identity.ExternalId);
 
             builder.Property(identity => identity.Email)
